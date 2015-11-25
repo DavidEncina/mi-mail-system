@@ -1,33 +1,60 @@
 
 /**
- * Write a description of class MailItem here.
- * 
+ * Permite crear objetos que son correos electronicos.
+ * En estos se ve el mensaje escrito en el correo, quien lo ha escrito y a quien va dirigido.
  * @author (your name) 
  * @version (a version number or a date)
  */
 public class MailItem
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    //Quien ha escrito el correo.
+    private String from;
+    //A quien se envia el correo.
+    private String to;
+    //El mensaje que se escribe dentro del correo.
+    private String message;
 
     /**
-     * Constructor for objects of class MailItem
+     * Crear un correo inicializando sus atributos por medio de parámetros.
      */
-    public MailItem()
+    public MailItem(String de, String para, String m)
     {
-        // initialise instance variables
-        x = 0;
+        from = de;
+        to = para;
+        message = m;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Devuelve quien ha escrito el correo.
      */
-    public int sampleMethod(int y)
+    public String getFrom()
     {
-        // put your code here
-        return x + y;
+        return from;
+    }
+    
+    /**
+     * Devuelve a quien se envia el correo.
+     */
+    public String getTo()
+    {
+        return to;
+    }
+    
+    /**
+     * Devuelve el mensaje del correo.
+     */
+    public String getMessage()
+    {
+        return message;
+    }
+    
+    /**
+     * Muestra por pantalla los atributos del correo.
+     */
+    public void print()
+    {
+        System.out.println ("De: " + from);
+        System.out.println ("Para: " +  to);
+        System.out.println ("Mensaje: " +  message);
     }
 }

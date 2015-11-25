@@ -1,33 +1,48 @@
 
 /**
- * Write a description of class MailClient here.
- * 
+ * Es el usuario de los servidores de correos.
+ * Puede mandar y recibir correos. 
  * @author (your name) 
  * @version (a version number or a date)
  */
 public class MailClient
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    // El servidor de correos que va a utilizar.
+    private MailServer server;
+    // El usuario que va a usar el servidor de correos.
+    private String user;
 
     /**
-     * Constructor for objects of class MailClient
+     * Permite crear un usuario de servidor de correos inicializando sus atributos por medio de parámetros.
      */
-    public MailClient()
+    public MailClient(String s, String u)
     {
-        // initialise instance variables
-        x = 0;
+        server = s;
+        user = u;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Recupera del servidor el siguiente correo que tenga el usuario y devuelva dicho objeto.     
      */
-    public int sampleMethod(int y)
+    public MailItem getNextMailItem()
     {
-        // put your code here
-        return x + y;
+        return server.getNextMailItem(user);
     }
+    
+    /**
+     * Enseña por pantalla el siguiente correo.
+     */
+    public void printNextMailItem()
+    {
+        System.out.println();
+    }
+    
+    /**
+     * Envía el correo al servidor asociado a ese cliente.
+     */
+    public void sendMailItem(String para, String m)
+    {
+        to = para;
+        message = m;
+    }     
 }

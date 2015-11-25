@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=de\ para\ m
+comment0.target=MailItem(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment0.text=\r\n\ Crear\ un\ correo\ inicializando\ sus\ atributos\ por\ medio\ de\ par\u00E1metros.\r\n
+comment1.params=
+comment1.target=java.lang.String\ getFrom()
+comment1.text=\r\n\ Devuelve\ quien\ ha\ escrito\ el\ correo.\r\n
+comment2.params=
+comment2.target=java.lang.String\ getTo()
+comment2.text=\r\n\ Devuelve\ a\ quien\ se\ envia\ el\ correo.\r\n
+comment3.params=
+comment3.target=java.lang.String\ getMessage()
+comment3.text=\r\n\ Devuelve\ el\ mensaje\ del\ correo.\r\n
+comment4.params=
+comment4.target=void\ print()
+comment4.text=\r\n\ Muestra\ por\ pantalla\ los\ atributos\ del\ correo.\r\n
+numComments=5
