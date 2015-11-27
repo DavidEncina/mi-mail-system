@@ -17,11 +17,11 @@ public class MailItem
     /**
      * Crear un correo inicializando sus atributos por medio de parámetros.
      */
-    public MailItem(String de, String para, String m)
+    public MailItem(String from, String to, String message)
     {
-        from = de;
-        to = para;
-        message = m;
+        this.from = from;
+        this.to = to;
+        this.message = message;
     }
 
     /**

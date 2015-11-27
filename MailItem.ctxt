@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=de\ para\ m
+comment0.params=from\ to\ message
 comment0.target=MailItem(java.lang.String,\ java.lang.String,\ java.lang.String)
 comment0.text=\r\n\ Crear\ un\ correo\ inicializando\ sus\ atributos\ por\ medio\ de\ par\u00E1metros.\r\n
 comment1.params=

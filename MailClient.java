@@ -15,14 +15,15 @@ public class MailClient
     /**
      * Permite crear un usuario de servidor de correos inicializando sus atributos por medio de parámetros.
      */
-    public MailClient(String s, String u)
+    public MailClient(MailServer server, String user)
     {
-        server = s;
-        user = u;
+        this.server = server;
+        this.user = user;
     }
 
     /**
-     * Recupera del servidor el siguiente correo que tenga el usuario y devuelva dicho objeto.     
+     * Recupera del servidor el siguiente correo que tenga el usuario y devuelva dicho objeto.
+     * Si no hay devuelve null.    
      */
     public MailItem getNextMailItem()
     {
@@ -30,19 +31,26 @@ public class MailClient
     }
     
     /**
-     * Enseña por pantalla el siguiente correo.
+     * Enseña por pantalla el siguiente correo. 
+     * Si no hay te avisa de ello.
      */
     public void printNextMailItem()
     {
-        System.out.println();
+        MailItem correo = getNextMailItem();
+        if(correo == null) {
+            System.out.println("No hay correo nuevo.");
+        }
+        else {
+            correo.print();
+        }
     }
     
     /**
      * Envía el correo al servidor asociado a ese cliente.
      */
-    public void sendMailItem(String para, String m)
+    public void sendMailItem(String to, String message)
     {
-        to = para;
-        message = m;
+        MailItem correo = new MailItem(user, to, message);
+        server.post(correo);
     }     
 }
