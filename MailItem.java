@@ -13,14 +13,17 @@ public class MailItem
     private String to;
     //El mensaje que se escribe dentro del correo.
     private String message;
+    //El asunto del correo.
+    private String subject;
 
     /**
      * Crear un correo inicializando sus atributos por medio de parámetros.
      */
-    public MailItem(String from, String to, String message)
+    public MailItem(String from, String to, String subject, String message)
     {
         this.from = from;
         this.to = to;
+        this.subject = subject;
         this.message = message;
     }
 
@@ -41,6 +44,14 @@ public class MailItem
     }
     
     /**
+     * Devuelve el asunto del correo.
+     */
+    public String getSubject()
+    {
+        return subject;
+    }
+    
+    /**
      * Devuelve el mensaje del correo.
      */
     public String getMessage()
@@ -55,6 +66,7 @@ public class MailItem
     {
         System.out.println ("De: " + from);
         System.out.println ("Para: " +  to);
+        System.out.println ("Asunto: " +  subject);
         System.out.println ("Mensaje: " +  message);
     }
 }
