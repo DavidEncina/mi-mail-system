@@ -26,7 +26,32 @@ public class MailClient
      */
     public void numeroCorreos()
     {
-        System.out.println("Hay " + server.howManyMailItems(user) + " correos en el servidor");        
+        System.out.println("Hay " + server.howManyMailItems(user) + " correo/s en el servidor");        
+    }
+    
+    /**
+     * Cuando se recibe un correo se puede contestar automáticamente al emisor.
+     */
+    public void contestarAuto()
+    {
+        MailItem correo = getNextMailItem();
+        if (getNextMailItem() != null) {
+            sendMailItem(correo.getFrom(), "No puedo contestar", "Estoy fuera de la oficina");
+        }
+    }    
+    
+    /**
+     * Obtiene del servidor el siguiente mensaje del usuario y responde automáticamente al emisor indicando que estamos de vacaciones.
+     */
+    public void getNextMailItemAndSendAutomaticRespond()
+    {
+        MailItem correo = getNextMailItem();
+        if(correo != null) {
+            sendMailItem(correo.getFrom(), "RE: " + correo.getSubject(), "\n" + correo.getMessage() + "\n" + "Estoy fuera de la oficina");
+        }
+        else {
+            System.out.println("No hay correo nuevo.");
+        }
     }
 
     /**
