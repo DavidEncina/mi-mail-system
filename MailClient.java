@@ -20,6 +20,14 @@ public class MailClient
         this.server = server;
         this.user = user;
     }
+    
+    /**
+     * Muestra por pantalla cuántos correos tenemos en el servidor para nosotros.
+     */
+    public void numeroCorreos()
+    {
+        System.out.println("Hay " + server.howManyMailItems(user) + " correos en el servidor");        
+    }
 
     /**
      * Recupera del servidor el siguiente correo que tenga el usuario y devuelva dicho objeto.
