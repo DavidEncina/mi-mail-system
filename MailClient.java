@@ -11,6 +11,8 @@ public class MailClient
     private MailServer server;
     // El usuario que va a usar el servidor de correos.
     private String user;
+    //El ultimo email recibido
+	private MailItem ultimoCorreo;
 
     /**
      * Permite crear un usuario de servidor de correos inicializando sus atributos por medio de parámetros.
@@ -19,6 +21,7 @@ public class MailClient
     {
         this.server = server;
         this.user = user;
+        ultimoCorreo = null;
     }
     
     /**
@@ -27,17 +30,6 @@ public class MailClient
     public void numeroCorreos()
     {
         System.out.println("Hay " + server.howManyMailItems(user) + " correo/s en el servidor");        
-    }
-    
-    /**
-     * Cuando se recibe un correo se puede contestar automáticamente al emisor.
-     */
-    public void contestarAuto()
-    {
-        MailItem correo = getNextMailItem();
-        if (getNextMailItem() != null) {
-            sendMailItem(correo.getFrom(), "No puedo contestar", "Estoy fuera de la oficina");
-        }
     }    
     
     /**
@@ -49,9 +41,6 @@ public class MailClient
         if(correo != null) {
             sendMailItem(correo.getFrom(), "RE: " + correo.getSubject(), "\n" + correo.getMessage() + "\n" + "Estoy fuera de la oficina");
         }
-        else {
-            System.out.println("No hay correo nuevo.");
-        }
     }
 
     /**
@@ -60,7 +49,11 @@ public class MailClient
      */
     public MailItem getNextMailItem()
     {
-        return server.getNextMailItem(user);
+        MailItem correo = server.getNextMailItem(user);    
+        if (correo != null) {
+            ultimoCorreo = correo;
+        }
+        return correo;        
     }
     
     /**
@@ -85,5 +78,19 @@ public class MailClient
     {
         MailItem correo = new MailItem(user, to, subject, message);
         server.post(correo);
-    }     
+    }  
+    
+    /**
+     * Muestra por pantalla los datos del ultimo email recibido.
+     * En caso de no haber recibido aun ningun email, informa de ello.
+     */
+    public void muestraUltimoEmail()
+    {
+        if (ultimoCorreo != null) {
+            ultimoCorreo.print();
+        }
+        else  {
+            System.out.println("No hay ningún mensaje.");
+        }
+    }
 }
