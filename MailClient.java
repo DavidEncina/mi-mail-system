@@ -11,9 +11,14 @@ public class MailClient
     private MailServer server;
     // El usuario que va a usar el servidor de correos.
     private String user;
-    //El ultimo email recibido
+    // El ultimo email recibido
 	private MailItem ultimoCorreo;
-
+	// Almacena cuantos correos se han enviado.
+	private int numeroCorreosEnviados;
+	// Almacena cuantos correos se han recibido.
+	private int numeroCorreosRecibidos;
+	// Almacena cuantos correos se han recibido con spam.
+	private int numeroCorreosConSpam;
 
     /**
      * Permite crear un usuario de servidor de correos inicializando sus atributos por medio de parámetros.
@@ -53,13 +58,12 @@ public class MailClient
         MailItem correo = server.getNextMailItem(user);    
         if (correo != null) {
             ultimoCorreo = correo;
+            numeroCorreosRecibidos++;
         }        
-        else if (correo.getMessage().contains("regalo")) {
+        else if (correo.getMessage().contains("regalo") || (correo.getMessage().contains("promocion"))) {
             correo = null;
+            numeroCorreosConSpam++;        
         }
-        else if (correo.getMessage().contains("promocion")) {
-            correo = null;
-        }     
         return correo;        
     }
     
@@ -78,12 +82,9 @@ public class MailClient
             System.out.println("El correo no tiene spam.");
             correo.print();
         }
-        else if (correo.getMessage().contains("regalo")) {
-            System.out.println("El correo contiene spam.");
-        }
-        else if (correo.getMessage().contains("promocion")) {
-            System.out.println("El correo contiene spam.");
-        }       
+        else if (correo.getMessage().contains("regalo") || (correo.getMessage().contains("promocion"))) {
+            System.out.println("El correo contiene spam.");            
+        }        
         else {
             correo.print();
         }
@@ -96,6 +97,7 @@ public class MailClient
     {
         MailItem correo = new MailItem(user, to, subject, message);
         server.post(correo);
+        numeroCorreosEnviados++;
     }  
     
     /**
@@ -110,5 +112,16 @@ public class MailClient
         else  {
             System.out.println("No hay ningún mensaje.");
         }
+    }
+    /**
+     * Muestra por pantalla unas estadísticas que incluyan el número de mensajes enviados, el número de mensajes recibidos, el número de mensajes que son spam,
+     * el porcentaje de spam y la dirección de la persona que nos envío el mensaje más largo junto con cuantos caracteres tenía ese mensaje.
+     */
+    public void showStats()
+    {
+        System.out.println("Se han enviado los siguientes correos: " + numeroCorreosEnviados);
+        System.out.println("Se han recibido los siguientes correos: " + numeroCorreosRecibidos);
+        System.out.println("Se han recibido los siguientes correos con spam: " + numeroCorreosConSpam);
+        System.out.println("El porcentaje de spams es: " + numeroCorreosConSpam*100/numeroCorreosRecibidos + "%");        
     }    
 }

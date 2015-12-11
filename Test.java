@@ -77,11 +77,8 @@ public class Test
         cliente1.sendMailItem("maria@gmail.com","Hola","Hola Maria regalo");
         cliente2.getNextMailItemAndSendAutomaticRespond();
         cliente1.printNextMailItem();
-        
-        System.out.println();
-        System.out.println("Probando cuando no hemos mandando ningun correo");
-        System.out.println("##########################");
-        cliente2.getNextMailItemAndSendAutomaticRespond();
-        cliente1.printNextMailItem();
+
+        cliente1.showStats();
+
     }
 }
