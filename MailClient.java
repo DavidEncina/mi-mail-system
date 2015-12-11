@@ -14,6 +14,7 @@ public class MailClient
     //El ultimo email recibido
 	private MailItem ultimoCorreo;
 
+
     /**
      * Permite crear un usuario de servidor de correos inicializando sus atributos por medio de parámetros.
      */
@@ -52,12 +53,19 @@ public class MailClient
         MailItem correo = server.getNextMailItem(user);    
         if (correo != null) {
             ultimoCorreo = correo;
+        }        
+        else if (correo.getMessage().contains("regalo")) {
+            correo = null;
         }
+        else if (correo.getMessage().contains("promocion")) {
+            correo = null;
+        }     
         return correo;        
     }
     
     /**
-     * Enseña por pantalla el siguiente correo. 
+     * Enseña por pantalla el siguiente correo.
+     * Si el mensaje tiene spam te avisa de ello.
      * Si no hay te avisa de ello.
      */
     public void printNextMailItem()
@@ -66,6 +74,16 @@ public class MailClient
         if(correo == null) {
             System.out.println("No hay correo nuevo.");
         }
+        else if (correo.getMessage().contains("trabajo")) {
+            System.out.println("El correo no tiene spam.");
+            correo.print();
+        }
+        else if (correo.getMessage().contains("regalo")) {
+            System.out.println("El correo contiene spam.");
+        }
+        else if (correo.getMessage().contains("promocion")) {
+            System.out.println("El correo contiene spam.");
+        }       
         else {
             correo.print();
         }
@@ -92,5 +110,5 @@ public class MailClient
         else  {
             System.out.println("No hay ningún mensaje.");
         }
-    }
+    }    
 }
